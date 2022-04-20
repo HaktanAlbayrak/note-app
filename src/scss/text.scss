@@ -1,0 +1,200 @@
+/* Text */
+
+.app-text-container {
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* No active note*/
+
+  .no-active-note {
+    width: 70%;
+    height: 100vh;
+    line-height: 100vh;
+    text-align: center;
+    font-size: 2rem;
+    color: #999;
+  }
+
+  /* Edit */
+  .app-text-note-edit {
+    height: 58vh;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+
+    .input-form {
+      position: relative;
+      width: 100%;
+      height: 3rem;
+      margin-bottom: 20px;
+
+      .textInput {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #161d34;
+        border-radius: 0.5rem;
+        outline: none;
+        font-family: inherit;
+        font-size: inherit;
+        padding: 1.25rem;
+        background: none;
+        &:hover {
+          border-color: #1641c6;
+        }
+
+        &:focus {
+          border-color: #1641c6;
+        }
+      }
+
+      .textInput-label {
+        position: absolute;
+        top: -0.5rem;
+        left: 1rem;
+        padding: 0 0.5rem;
+        color: gray;
+        background-color: white;
+        font-size: 0.8rem;
+      }
+    }
+
+    .textarea-form {
+      position: relative;
+      width: 100%;
+
+      .textArea {
+        border: 2px solid #161d34;
+        border-radius: 0.5rem;
+        margin-bottom: 20px;
+        width: 100%;
+        height: calc(50vh - 130px);
+        padding: 10px;
+        resize: none;
+        font-size: inherit;
+        font-family: inherit;
+
+        &:hover {
+          border-color: #1641c6;
+        }
+
+        &:focus {
+          border-color: #1641c6;
+        }
+      }
+
+      .textarea-label {
+        position: absolute;
+        top: -0.5rem;
+        left: 1rem;
+        padding: 0 0.5rem;
+        color: gray;
+        background-color: white;
+        font-size: 0.8rem;
+      }
+    }
+  }
+  /* Color select*/
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .color-select-form {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+
+      .colors {
+        display: flex;
+        align-items: center;
+
+        input {
+          width: 30px;
+          height: 30px;
+          margin-right: 0.3rem;
+          cursor: pointer;
+          position: relative;
+          appearance: none;
+          border-radius: 50%;
+
+          &:checked::after {
+            content: "\2713";
+            font-family: "Material Icons";
+            color: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.4rem;
+          }
+
+          &:hover::before {
+            content: "\2713";
+            font-family: "Material Icons";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.4rem;
+            color: #ccc;
+          }
+        }
+      }
+    }
+
+    .app-add-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .add-button {
+        background: linear-gradient(to right, #0575e6, #021b79);
+        width: 100px;
+        height: 30px;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        text-align: center;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        &:hover {
+          background-position: right center;
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  /* Preview */
+  .app-text-note-preview {
+    height: 40vh;
+    border-top: 1px solid #ddd;
+    overflow-y: scroll;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.02);
+
+    .preview-title {
+      padding: 25px 25px 0 25px;
+      margin: 0;
+    }
+
+    .markdown-preview {
+      padding: 0 25px 25px 25px;
+      font-size: 1rem;
+      line-height: 2rem;
+    }
+  }
+}
