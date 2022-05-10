@@ -1,17 +1,13 @@
-import { nanoid } from "@reduxjs/toolkit";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
 import "../scss/text.scss";
 
-import { addNote } from "../store/projectStore";
+import { saveNote } from "../store/projectStore";
 
 const Text = () => {
-  const updatedNote = useSelector((state) => state.projectSlice.updatedNote);
-
-  const [id] = useState(updatedNote.id);
-  const [title, setTitle] = useState(updatedNote?.title || "");
-  const [content, setContent] = useState(updatedNote?.content || "");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [color, setColor] = useState("#3FC1C9");
 
   const dispatch = useDispatch();
@@ -24,12 +20,11 @@ const Text = () => {
   const handleSaveNoteButton = (e) => {
     e.preventDefault();
 
-    if (title === "" && content === "") {
+    if (title === "" || content === "") {
       alert("Lütfen alanları doldurun");
     } else {
       dispatch(
-        addNote({
-          id: nanoid(),
+        saveNote({
           title,
           content,
           lastModified: date,
@@ -46,13 +41,13 @@ const Text = () => {
       <div className="app-text-note-edit">
         <div className="input-form">
           <input
-            key={id}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
             type="text"
             autoFocus
             autoComplete="off"
             className="textInput"
-            placeholder=" "
             value={title}
           />
           <label htmlFor="text" className="textInput-label">
@@ -61,10 +56,12 @@ const Text = () => {
         </div>
         <div className="textarea-form">
           <textarea
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
             className="textArea"
             value={content}
-          ></textarea>
+          />
           <label htmlFor="text" className="textarea-label">
             Not
           </label>
@@ -119,6 +116,7 @@ const Text = () => {
       </div>
       <div className="app-text-note-preview">
         <h1 className="preview-title">{title}</h1>
+        <br />
         <ReactMarkdown className="markdown-preview">{content}</ReactMarkdown>
       </div>
     </div>

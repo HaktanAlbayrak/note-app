@@ -1,15 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 export const projectStoreSlice = createSlice({
   name: "notes",
   initialState: {
     items: [],
-    updatedNote: [],
   },
   reducers: {
-    addNote: {
+    saveNote: {
       reducer: (state, action) => {
         state.items.push(action.payload);
+      },
+      prepare: ({ title, content, color, lastModified }) => {
+        return {
+          payload: {
+            id: nanoid(),
+            title: title,
+            content: content,
+            color: color,
+            lastModified: lastModified,
+          },
+        };
       },
     },
     deleteNote: {
@@ -19,23 +29,9 @@ export const projectStoreSlice = createSlice({
         state.items = filtered;
       },
     },
-    updateNote: {
-      reducer: (state, action) => {
-        const { id, title, content, color } = action.payload;
-
-        const existingNote = state.items.find((item) => item.id === id);
-
-        if (existingNote) {
-          existingNote.title = title;
-          existingNote.content = content;
-          existingNote.color = color;
-          state.updatedNote = existingNote;
-        }
-      },
-    },
   },
 });
 
-export const { addNote, deleteNote, updateNote } = projectStoreSlice.actions;
+export const { saveNote, deleteNote, editNote } = projectStoreSlice.actions;
 
 export default projectStoreSlice.reducer;

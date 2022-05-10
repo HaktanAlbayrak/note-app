@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteNote, updateNote } from "../store/projectStore";
+import { deleteNote, editNote } from "../store/projectStore";
 import "../scss/notes.scss";
 
-const Notes = () => {
-  const [activeNote, setActiveNote] = useState(false);
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
+const Notes = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.projectSlice.items);
 
@@ -13,19 +14,6 @@ const Notes = () => {
     if (window.confirm("emin misin?")) {
       dispatch(deleteNote(id));
     }
-  };
-
-  const handleEditNote = (id, title, content, lastModified, color) => {
-    setActiveNote(id);
-    dispatch(
-      updateNote({
-        id: id,
-        title: title,
-        content: content,
-        lastModified: lastModified,
-        color: color,
-      })
-    );
   };
 
   return (
@@ -37,17 +25,8 @@ const Notes = () => {
         {items.map((item) => (
           <div
             key={item.id}
-            className={`app-sidebar-note ${item.id === activeNote && "active"}`}
+            className="app-sidebar-note"
             style={{ backgroundColor: item.color }}
-            onClick={() =>
-              handleEditNote(
-                item.id,
-                item.title,
-                item.content,
-                item.lastModified,
-                item.color
-              )
-            }
           >
             <div className="app-sidebar-notes-title">
               <h4>{item.title}</h4>
@@ -55,11 +34,16 @@ const Notes = () => {
                 onClick={() => handleDelete(item.id)}
                 className="app-sidebar-title-button"
               >
-                Sil
+                <FontAwesomeIcon icon={faTrash} />
               </span>
             </div>
-            <p>{item.content && item.content.substr(0, 50) + "..."}</p>
-            <small>Son düzenleme: {item.lastModified}</small>
+            <p>{item.content && item.content.substr(0, 100) + "..."}</p>
+            <small>
+              {new Date(item.lastModified).toLocaleDateString("tr", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </small>
           </div>
         ))}
       </div>

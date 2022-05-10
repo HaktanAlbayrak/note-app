@@ -183,10 +183,10 @@
     height: 40vh;
     border-top: 1px solid #ddd;
     overflow-y: scroll;
-    overflow: hidden;
     background: rgba(0, 0, 0, 0.02);
 
     .preview-title {
+      text-transform: uppercase;
       padding: 25px 25px 0 25px;
       margin: 0;
     }
