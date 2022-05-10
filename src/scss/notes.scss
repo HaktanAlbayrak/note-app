@@ -45,15 +45,6 @@
       transition: all 1s ease;
       font-weight: 300;
 
-      &:hover {
-        background: #ddd;
-      }
-
-      &.active {
-        background: #08c;
-        color: white;
-      }
-
       .app-sidebar-notes-title {
         display: flex;
         justify-content: space-between;
@@ -67,12 +58,14 @@
           border: none;
         }
       }
-
-      .markdown-preview {
-        padding: 0 25px 25px 25px;
-        font-size: 1rem;
-        line-height: 2rem;
-      }
+    }
+    .active {
+      color: white;
+      transform: scale(1.05);
+      -webkit-transform: scale(1.05);
+      -moz-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+      -o-transform: scale(1.05);
     }
   }
 }

@@ -1,14 +1,17 @@
 import { nanoid } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../scss/text.scss";
 
 import { addNote } from "../store/projectStore";
 
 const Text = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const updatedNote = useSelector((state) => state.projectSlice.updatedNote);
+
+  const [id] = useState(updatedNote.id);
+  const [title, setTitle] = useState(updatedNote?.title || "");
+  const [content, setContent] = useState(updatedNote?.content || "");
   const [color, setColor] = useState("#3FC1C9");
 
   const dispatch = useDispatch();
@@ -43,6 +46,7 @@ const Text = () => {
       <div className="app-text-note-edit">
         <div className="input-form">
           <input
+            key={id}
             onChange={(e) => setTitle(e.target.value)}
             type="text"
             autoFocus

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteNote, addNote } from "../store/projectStore";
+import { deleteNote, updateNote } from "../store/projectStore";
 import "../scss/notes.scss";
-import { nanoid } from "@reduxjs/toolkit";
 
 const Notes = () => {
+  const [activeNote, setActiveNote] = useState(false);
+
   const dispatch = useDispatch();
   const items = useSelector((state) => state.projectSlice.items);
 
@@ -14,40 +15,39 @@ const Notes = () => {
     }
   };
 
-  const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
-
-  const handleAdd = () => {
+  const handleEditNote = (id, title, content, lastModified, color) => {
+    setActiveNote(id);
     dispatch(
-      addNote({
-        id: nanoid(),
-        title: "Untitled Note",
-        content: "",
-        lastModified: date,
-        color: "#3FC1C9",
+      updateNote({
+        id: id,
+        title: title,
+        content: content,
+        lastModified: lastModified,
+        color: color,
       })
     );
   };
-
-  const handleUpdate = () => {};
 
   return (
     <div className="app-container">
       <div className="app-siderbar-header">
         <h1 className="header-title">Notes</h1>
-        <span onClick={handleAdd} className="header-add-button">
-          Ekle
-        </span>
       </div>
       <div className="app-sidebar-notes">
         {items.map((item) => (
           <div
             key={item.id}
-            className="app-sidebar-note"
+            className={`app-sidebar-note ${item.id === activeNote && "active"}`}
             style={{ backgroundColor: item.color }}
-            onClick={handleUpdate}
+            onClick={() =>
+              handleEditNote(
+                item.id,
+                item.title,
+                item.content,
+                item.lastModified,
+                item.color
+              )
+            }
           >
             <div className="app-sidebar-notes-title">
               <h4>{item.title}</h4>

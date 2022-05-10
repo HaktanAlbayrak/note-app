@@ -27,8 +27,8 @@ export const projectStoreSlice = createSlice({
 
         if (existingNote) {
           existingNote.title = title;
-          existingNote.title = content;
-          existingNote.title = color;
+          existingNote.content = content;
+          existingNote.color = color;
           state.updatedNote = existingNote;
         }
       },

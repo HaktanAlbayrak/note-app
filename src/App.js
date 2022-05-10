@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import Notes from "./components/Notes";
 import Text from "./components/Text";
