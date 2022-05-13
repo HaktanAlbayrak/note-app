@@ -32,6 +32,6 @@ export const projectStoreSlice = createSlice({
   },
 });
 
-export const { saveNote, deleteNote, editNote } = projectStoreSlice.actions;
+export const { saveNote, deleteNote } = projectStoreSlice.actions;
 
 export default projectStoreSlice.reducer;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "../scss/text.scss";
 
 import { saveNote } from "../store/projectStore";
@@ -21,7 +21,7 @@ const Text = () => {
     e.preventDefault();
 
     if (title === "" || content === "") {
-      alert("Lütfen alanları doldurun");
+      alert("Lütfen tüm alanları doldur!");
     } else {
       dispatch(
         saveNote({

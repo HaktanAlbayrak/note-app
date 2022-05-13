@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteNote, editNote } from "../store/projectStore";
+import { deleteNote } from "../store/projectStore";
 import "../scss/notes.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,7 @@ const Notes = () => {
   const items = useSelector((state) => state.projectSlice.items);
 
   const handleDelete = (id) => {
-    if (window.confirm("emin misin?")) {
+    if (window.confirm("Emin misin?")) {
       dispatch(deleteNote(id));
     }
   };
@@ -37,12 +37,13 @@ const Notes = () => {
                 <FontAwesomeIcon icon={faTrash} />
               </span>
             </div>
-            <p>{item.content && item.content.substr(0, 100) + "..."}</p>
+            <p className="note-content">{item.content}</p>
             <small>
-              {new Date(item.lastModified).toLocaleDateString("tr", {
+              {/* {new Date(item.lastModified).toLocaleDateString("tr", {
                 hour: "2-digit",
                 minute: "2-digit",
-              })}
+              })} */}
+              {item.lastModified}
             </small>
           </div>
         ))}
