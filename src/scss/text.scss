@@ -6,17 +6,6 @@
   display: flex;
   flex-direction: column;
 
-  /* No active note*/
-
-  .no-active-note {
-    width: 70%;
-    height: 100vh;
-    line-height: 100vh;
-    text-align: center;
-    font-size: 2rem;
-    color: #999;
-  }
-
   /* Edit */
   .app-text-note-edit {
     height: 58vh;
@@ -155,7 +144,7 @@
 
       .add-button {
         background: linear-gradient(to right, #0575e6, #021b79);
-        width: 100px;
+        width: 75px;
         height: 30px;
         border: none;
         outline: none;

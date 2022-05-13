@@ -10,9 +10,8 @@
 
   .app-siderbar-header {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: left;
     padding: 25px;
     border-bottom: 1px solid #ddd;
 
@@ -20,16 +19,27 @@
       letter-spacing: 10px;
       background: linear-gradient(to right, #0575e6, #021b79);
       text-transform: uppercase;
+      margin-bottom: 10px;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .header-add-button {
-      cursor: pointer;
-      color: #0575e6;
-      font-weight: 600;
-      font-size: 18px;
-      border: none;
+    .header-input {
+      height: 40px;
+      border: 2px solid #161d34;
+      border-radius: 0.3rem;
+      outline: none;
+      font-family: inherit;
+      font-size: inherit;
+      padding: 9px;
+      background: none;
+      &:hover {
+        border-color: #1641c6;
+      }
+
+      &:focus {
+        border-color: #1641c6;
+      }
     }
   }
 
@@ -47,17 +57,39 @@
 
       .app-sidebar-notes-title {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         margin-bottom: 10px;
         text-transform: uppercase;
         border-bottom: 0.5px solid gray;
+        .notes-buttons {
+          display: flex;
+          flex-direction: row;
 
-        .app-sidebar-title-button {
-          cursor: pointer;
-          color: rgb(88, 43, 170);
-          font-weight: 500;
-          font-size: 18px;
-          border: none;
+          .app-sidebar-title-edit-button {
+            cursor: pointer;
+            color: rgb(139, 142, 143);
+            font-weight: 500;
+            font-size: 22px;
+            border: none;
+            margin-right: 10px;
+
+            &:hover {
+              color: rgb(192, 216, 219);
+            }
+          }
+
+          .app-sidebar-title-delete-button {
+            cursor: pointer;
+            color: crimson;
+            font-weight: 500;
+            font-size: 22px;
+            border: none;
+
+            &:hover {
+              color: rgb(231, 209, 209);
+            }
+          }
         }
       }
 

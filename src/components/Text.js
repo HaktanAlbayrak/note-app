@@ -8,14 +8,11 @@ import { saveNote } from "../store/projectStore";
 const Text = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [color, setColor] = useState("#3FC1C9");
+  const [color, setColor] = useState("#44C767");
 
   const dispatch = useDispatch();
 
-  const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}, ${current.getHours()}:${current.getMinutes()}`;
+  const date = new Date().toLocaleString();
 
   const handleSaveNoteButton = (e) => {
     e.preventDefault();
@@ -49,9 +46,10 @@ const Text = () => {
             autoComplete="off"
             className="textInput"
             value={title}
+            maxLength="20"
           />
           <label htmlFor="text" className="textInput-label">
-            Not Başlığı
+            Title
           </label>
         </div>
         <div className="textarea-form">
@@ -63,7 +61,7 @@ const Text = () => {
             value={content}
           />
           <label htmlFor="text" className="textarea-label">
-            Not
+            Text
           </label>
         </div>
         <div className="buttons">
@@ -71,9 +69,9 @@ const Text = () => {
             <div className="colors">
               <input
                 type="radio"
-                style={{ backgroundColor: "#3FC1C9" }}
+                style={{ backgroundColor: "#44C767" }}
                 name="color"
-                value="#3FC1C9"
+                value="#44C767"
                 defaultChecked={true}
                 onClick={(e) => setColor(e.target.value)}
               />
@@ -109,7 +107,7 @@ const Text = () => {
           </div>
           <div className="app-add-button">
             <button onClick={handleSaveNoteButton} className="add-button">
-              Kaydet
+              Save
             </button>
           </div>
         </div>
