@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../scss/text.scss";
 
 import { saveNote } from "../store/projectStore";
 
 const Text = () => {
+  const items = useSelector((state) => state.projectSlice.items);
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [color, setColor] = useState("#44C767");
