@@ -7,7 +7,7 @@ import NoteItems from "./NoteItems";
 const Notes = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.projectSlice.items);
-  const search = useSelector((state) => state.projectSlice.search);
+  const filter = useSelector((state) => state.projectSlice.filter);
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
@@ -24,14 +24,14 @@ const Notes = () => {
           placeholder="Search..."
           autoComplete="false"
           className="header-input"
-          maxLength="20"
+          maxLength="25"
           value={searchValue}
         />
       </div>
       <div className="app-sidebar-notes">
         {items.map((note, index) =>
-          note.title.search(search) != -1 ||
-          note.content.search(search) != -1 ? (
+          note.title.search(filter) != -1 ||
+          note.content.search(filter) != -1 ? (
             <NoteItems key={index} note={note} />
           ) : null
         )}

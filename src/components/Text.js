@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
 import "../scss/text.scss";
 
-import { saveNote } from "../store/projectStore";
+import { saveNote, saveEditedNote } from "../store/projectStore";
 
 const Text = () => {
-  const items = useSelector((state) => state.projectSlice.items);
+  const edit = useSelector((state) => state.projectSlice.edit);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [color, setColor] = useState("#44C767");
 
+  const [updateTitleValue, setUpdateTitleValue] = useState(edit.title);
+  const [updateContentValue, setUpdateContentValue] = useState(edit.content);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setUpdateContentValue(edit.content);
+    setUpdateTitleValue(edit.title);
+  }, [edit]);
 
   const date = new Date().toLocaleString();
 
@@ -30,9 +38,28 @@ const Text = () => {
           color,
         })
       );
-      setTitle("");
-      setContent("");
     }
+    setTitle("");
+    setUpdateTitleValue("");
+    setContent("");
+    setUpdateContentValue("");
+  };
+
+  const handleSaveEditedNoteButton = (e) => {
+    dispatch(
+      saveEditedNote({
+        id: edit.id,
+        title: updateTitleValue,
+        content: updateContentValue,
+        lastModified: date,
+        color,
+      })
+    );
+
+    setTitle("");
+    setUpdateTitleValue("");
+    setContent("");
+    setUpdateContentValue("");
   };
 
   return (
@@ -41,14 +68,19 @@ const Text = () => {
         <div className="input-form">
           <input
             onChange={(e) => {
-              setTitle(e.target.value);
+              if (edit.id) {
+                setTitle(updateTitleValue);
+                setUpdateTitleValue(e.target.value);
+              } else {
+                setTitle(e.target.value);
+              }
             }}
             type="text"
             autoFocus
             autoComplete="off"
             className="textInput"
-            value={title}
-            maxLength="20"
+            value={edit.id ? updateTitleValue : title}
+            maxLength="25"
           />
           <label htmlFor="text" className="textInput-label">
             Title
@@ -57,10 +89,15 @@ const Text = () => {
         <div className="textarea-form">
           <textarea
             onChange={(e) => {
-              setContent(e.target.value);
+              if (edit.id) {
+                setContent(updateContentValue);
+                setUpdateContentValue(e.target.value);
+              } else {
+                setContent(e.target.value);
+              }
             }}
             className="textArea"
-            value={content}
+            value={edit.id ? updateContentValue : content}
           />
           <label htmlFor="text" className="textarea-label">
             Text
@@ -108,16 +145,27 @@ const Text = () => {
             </div>
           </div>
           <div className="app-add-button">
-            <button onClick={handleSaveNoteButton} className="add-button">
-              Save
-            </button>
+            {edit.id ? (
+              <button
+                onClick={handleSaveEditedNoteButton}
+                className="save-button"
+              >
+                Save
+              </button>
+            ) : (
+              <button onClick={handleSaveNoteButton} className="add-button">
+                Save
+              </button>
+            )}
           </div>
         </div>
       </div>
       <div className="app-text-note-preview">
-        <h1 className="preview-title">{title}</h1>
+        <h1 className="preview-title">{edit.id ? updateTitleValue : title}</h1>
         <br />
-        <ReactMarkdown className="markdown-preview">{content}</ReactMarkdown>
+        <ReactMarkdown className="markdown-preview">
+          {edit.id ? updateContentValue : content}
+        </ReactMarkdown>
       </div>
     </div>
   );

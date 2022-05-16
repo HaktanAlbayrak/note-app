@@ -111,6 +111,7 @@
           position: relative;
           appearance: none;
           border-radius: 50%;
+          border: 2px solid rgb(170, 165, 165);
 
           &:checked::after {
             content: "\2713";
@@ -144,6 +145,28 @@
 
       .add-button {
         background: linear-gradient(to right, #0575e6, #021b79);
+        width: 75px;
+        height: 30px;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        text-align: center;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        &:hover {
+          background-position: right center;
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+      .save-button {
+        background: linear-gradient(to right, #8e9eab, #eef2f3);
         width: 75px;
         height: 30px;
         border: none;

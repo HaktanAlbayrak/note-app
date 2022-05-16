@@ -24,7 +24,9 @@ const NoteItems = ({ note }) => {
         <h4>{note.title}</h4>
         <div className="notes-buttons">
           <span
-            // onClick={() => handleEdit(note.id)}
+            onClick={() =>
+              dispatch(editNote(note.id, note.title, note.content, note.color))
+            }
             className="app-sidebar-title-edit-button"
           >
             <FontAwesomeIcon icon={faPenToSquare} />

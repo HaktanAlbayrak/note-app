@@ -4,19 +4,9 @@ export const projectStoreSlice = createSlice({
   name: "notes",
   initialState: {
     items: [],
+    olditems: [],
+    edit: [],
     search: "",
-    // oldItems: [{}],
-    noteEdit: [],
-    // showNote: {
-    //   state: false,
-    //   index: 0,
-    //   searching: false,
-    // },
-    editingNote: {
-      state: false,
-      index: 0,
-      editing: false,
-    },
   },
   reducers: {
     saveNote: {
@@ -35,6 +25,14 @@ export const projectStoreSlice = createSlice({
         };
       },
     },
+    saveEditedNote: {
+      reducer: (state, action) => {
+        state.edit = action.payload;
+        let editedNote = [state.edit];
+        state.items = [...editedNote];
+        state.edit = [];
+      },
+    },
     deleteNote: {
       reducer: (state, action) => {
         const id = action.payload;
@@ -44,36 +42,20 @@ export const projectStoreSlice = createSlice({
     },
     searchNote: {
       reducer: (state, action) => {
-        //   if (!state.showNote.searching) {
-        //     state.oldItems = [...state.items];
-        //     state.showNote.searching = true;
-        //   }
-        //   state.items = state.items.filter((item) =>
-        //     item.title.toLowerCase().includes(action.payload.toLowerCase())
-        //   );
-        //   if (action.payload.length === 0) {
-        //     state.items = state.oldItems;
-        //     state.showNote.searching = false;
-        //   }
-        state.search = action.payload.toLowerCase();
+        state.filter = action.payload.toLowerCase();
       },
     },
     editNote: {
       reducer: (state, action) => {
         const id = action.payload;
-        if (!state.editingNote.editing) {
-          state.noteEdit = [...state.items];
-          state.editingNote.editing = true;
-        }
-        state.noteEdit = state.noteEdit.find((item) => item.id === id);
-        // state.items = state.oldItems;
-        // state.editingNote.editing = false;
+        state.edit = [...state.items];
+        state.edit = state.edit.find((item) => item.id === id);
       },
     },
   },
 });
 
-export const { saveNote, deleteNote, searchNote, editNote } =
+export const { saveNote, deleteNote, searchNote, editNote, saveEditedNote } =
   projectStoreSlice.actions;
 
 export default projectStoreSlice.reducer;
