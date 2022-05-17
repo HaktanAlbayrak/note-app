@@ -42,6 +42,7 @@ To run the project locally.
 - [Instagram](https://www.instagram.com/haktan_albyrk/)
 - [Linkedin](https://www.linkedin.com/in/haktan-albayrak-55539422b/) 
 - [Twitter](https://twitter.com/Haktan_Albyrk) 
+- [Patika.dev profile](https://app.patika.dev/tbugg) 
 
   
 
