@@ -16,11 +16,9 @@ And in addition, you can access the view of the project from the link.
   
 ## Screenshot
 
-![Uygulama Ekran Görüntüsü](images/notesapp.jpg)
+![Uygulama Ekran Görüntüsü](https://github.com/HaktanAlbayrak/note-app/blob/master/image/notesapp.jpg)
 
   
-##
-![Logo](https://t4.ftcdn.net/jpg/03/54/40/85/360_F_354408578_y4G5TQTNU8939O4L57mqGdoCuy1i7jXv.jpg)
 ##
     
 ## Available Scripts
@@ -46,8 +44,5 @@ To run the project locally.
 - [Twitter](https://twitter.com/Haktan_Albyrk) 
 
   
-## Demo
-
-Demoya gif veya bağlantı ekleyin
 
   
