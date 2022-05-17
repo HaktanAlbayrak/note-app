@@ -3,7 +3,9 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 export const projectStoreSlice = createSlice({
   name: "notes",
   initialState: {
-    items: [],
+    items: localStorage.getItem("notes")
+      ? JSON.parse(localStorage.getItem("notes"))
+      : [],
     edit: [],
     filter: "",
   },
@@ -11,6 +13,7 @@ export const projectStoreSlice = createSlice({
     saveNote: {
       reducer: (state, action) => {
         state.items.push(action.payload);
+        localStorage.setItem("notes", JSON.stringify(state.items));
       },
       prepare: ({ title, content, color, lastModified }) => {
         return {
@@ -26,14 +29,16 @@ export const projectStoreSlice = createSlice({
     },
     saveEditedNote: {
       reducer: (state, action) => {
-        const { id, title, content, color } = action.payload;
+        const { id, title, content, color, lastModified } = action.payload;
         const editedNote = state.items.find((item) => item.id === id);
 
         editedNote.title = title;
         editedNote.content = content;
         editedNote.color = color;
+        editedNote.lastModified = lastModified;
 
         state.edit = [];
+        localStorage.setItem("notes", JSON.stringify(state.items));
       },
     },
     deleteNote: {
@@ -41,6 +46,7 @@ export const projectStoreSlice = createSlice({
         const id = action.payload;
         const filtered = state.items.filter((item) => item.id !== id);
         state.items = filtered;
+        localStorage.setItem("notes", JSON.stringify(state.items));
       },
     },
     searchNote: {

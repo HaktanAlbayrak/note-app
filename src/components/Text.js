@@ -38,11 +38,11 @@ const Text = () => {
           color,
         })
       );
+      setTitle("");
+      setUpdateTitleValue("");
+      setContent("");
+      setUpdateContentValue("");
     }
-    setTitle("");
-    setUpdateTitleValue("");
-    setContent("");
-    setUpdateContentValue("");
   };
 
   const handleSaveEditedNoteButton = (e) => {
@@ -69,7 +69,6 @@ const Text = () => {
           <input
             onChange={(e) => {
               if (edit.id) {
-                setTitle(updateTitleValue);
                 setUpdateTitleValue(e.target.value);
               } else {
                 setTitle(e.target.value);
@@ -90,7 +89,6 @@ const Text = () => {
           <textarea
             onChange={(e) => {
               if (edit.id) {
-                setContent(updateContentValue);
                 setUpdateContentValue(e.target.value);
               } else {
                 setContent(e.target.value);
