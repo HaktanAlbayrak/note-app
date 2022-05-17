@@ -4,9 +4,8 @@ export const projectStoreSlice = createSlice({
   name: "notes",
   initialState: {
     items: [],
-    olditems: [],
     edit: [],
-    search: "",
+    filter: "",
   },
   reducers: {
     saveNote: {
@@ -27,9 +26,13 @@ export const projectStoreSlice = createSlice({
     },
     saveEditedNote: {
       reducer: (state, action) => {
-        state.edit = action.payload;
-        let editedNote = [state.edit];
-        state.items = [...editedNote];
+        const { id, title, content, color } = action.payload;
+        const editedNote = state.items.find((item) => item.id === id);
+
+        editedNote.title = title;
+        editedNote.content = content;
+        editedNote.color = color;
+
         state.edit = [];
       },
     },
