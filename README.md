@@ -1,6 +1,6 @@
 
 # NOTE APP
-In this project, you can review my NOTE project that I made using react redux-toolkit. You can download **npm install** packages to the terminal and install the packages, then you can start the project by typing **npm start** in the terminal.
+In this project, you can review my NOTE project that I made using react redux-toolkit. You can download **npm install** packages to the terminal, then you can start the project by typing **npm start** in the terminal.
 this project is the first assignment of the patika.dev redux course.
 
 
